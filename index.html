@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Java Programming MOOC Solutions</title>
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.12.0/styles/tokyo-night-dark.min.css"
+        />
+    </head>
+
+    <body>
+        <h2>🚧Work in Progress!🚧</h2>
+        <pre><code id="code-block" class="language-java">Loading code...</code></pre>
+        <script>
+            fetch(
+                "https://raw.githubusercontent.com/Akash8130/mooc-java-programming-i/refs/heads/main/mooc-java-programming-i/part01-Part01_11.VariousVariables/src/main/java/VariousVariables.java",
+            )
+                .then((response) => response.text())
+                .then((data) => {
+                    const codeElement = document.getElementById("code-block");
+                    codeElement.textContent = data;
+
+                    // Manually trigger code highlighting
+                    hljs.highlightElement(codeElement);
+                });
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.12.0/highlight.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.12.0/languages/go.min.js"></script>
+    </body>
+</html>
