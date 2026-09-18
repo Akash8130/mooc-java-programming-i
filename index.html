@@ -3,23 +3,55 @@
     <head>
         <title>Java Programming MOOC Solutions</title>
         <link rel="stylesheet" href="style.css" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/4.0.0/jquery.min.js"></script>
     </head>
 
     <body>
         <h2>🚧Work in Progress!🚧</h2>
-        <pre><code id="code-block" class="language-java">Loading code...</code></pre>
+        <select id="select"></select>
+        <p>
+            Showing solution for:
+            <span class="output"></span>
+        </p>
+
+        <button onclick="getOption()">Check option</button>
+        <pre><code id="code-block" class="language-java">Select exercise from dropdown above.</code></pre>
         <script>
+            let path = [];
             fetch(
-                "https://raw.githubusercontent.com/Akash8130/mooc-java-programming-i/refs/heads/main/mooc-java-programming-i/part01-Part01_11.VariousVariables/src/main/java/VariousVariables.java",
+                "https://raw.githubusercontent.com/Akash8130/mooc-java-programming-i/refs/heads/main/path.txt",
             )
                 .then((response) => response.text())
                 .then((data) => {
-                    const codeElement = document.getElementById("code-block");
-                    codeElement.textContent = data;
-
-                    // Manually trigger code highlighting
-                    hljs.highlightElement(codeElement);
+                    path = data.split(/\r?\n/);
+                    dropdownList();
                 });
+
+            function dropdownList() {
+                const select = document.getElementById("select");
+                for (let i = 0; i < path.length; i++) {
+                    select.add(new Option(path[i]));
+                }
+            }
+            function getOption() {
+                selectElement = document.querySelector("#select");
+                output = selectElement.value;
+                longName = output;
+                shortName = output.split(".")[1];
+                document.querySelector(".output").textContent = shortName;
+                fetch(
+                    `https://raw.githubusercontent.com/Akash8130/mooc-java-programming-i/refs/heads/main/mooc-java-programming-i/${longName}/src/main/java/${shortName}.java`,
+                )
+                    .then((response) => response.text())
+                    .then((data) => {
+                        const codeElement =
+                            document.getElementById("code-block");
+                        codeElement.textContent = data;
+
+                        // Manually trigger code highlighting
+                        hljs.highlightElement(codeElement);
+                    });
+            }
         </script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.12.0/highlight.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.12.0/languages/go.min.js"></script>
