@@ -6,14 +6,14 @@
     </head>
 
     <body>
-        <h2>🚧Work in Progress!🚧</h2>
+        <h2>Java Programming MOOC Solutions</h2>
         <select id="select"></select>
         <p>
             Showing solution for:
             <span class="output"></span>
         </p>
 
-        <button onclick="getOption()">Check option</button>
+        <button onclick="getOption()">Show</button>
         <pre><code id="code-block" class="language-java">Select exercise from dropdown above.</code></pre>
         <script>
             let path = [];
@@ -23,6 +23,7 @@
                 .then((response) => response.text())
                 .then((data) => {
                     path = data.split(/\r?\n/);
+                    path = path.filter((line) => line.trim() !== "");
                     dropdownList();
                 });
 
@@ -47,7 +48,6 @@
                             document.getElementById("code-block");
                         codeElement.textContent = data;
 
-                        // Manually trigger code highlighting
                         hljs.highlightElement(codeElement);
                     });
             }
