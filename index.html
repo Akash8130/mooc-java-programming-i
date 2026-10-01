@@ -34,10 +34,10 @@
                 }
             }
             function getOption() {
-                selectElement = document.querySelector("#select");
-                output = selectElement.value;
-                longName = output;
-                shortName = output.split(".")[1];
+                const selectElement = document.querySelector("#select");
+                const output = selectElement.value;
+                const longName = output;
+                const shortName = output.split(".")[1];
                 document.querySelector(".output").textContent = shortName;
                 fetch(
                     `https://raw.githubusercontent.com/Akash8130/mooc-java-programming-i/refs/heads/main/mooc-java-programming-i/${longName}/src/main/java/${shortName}.java`,
@@ -47,6 +47,10 @@
                         const codeElement =
                             document.getElementById("code-block");
                         codeElement.textContent = data;
+
+                        if (codeElement.dataset.highlighted === "yes") {
+                            delete codeElement.dataset.highlighted;
+                        }
 
                         hljs.highlightElement(codeElement);
                     });
